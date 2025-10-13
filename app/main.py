@@ -18,7 +18,7 @@ def main():
 
     iface = gr.Interface(
         fn=predict,
-        inputs=gr.Sketchpad(crop_size=(256,256), label="Draw a Digit"),
+        inputs=gr.Sketchpad(crop_size=(256,256), label="Draw a Digit a khawa"),
         outputs=gr.Label(num_top_classes=1),
         title="Digit Classifier"
     )
