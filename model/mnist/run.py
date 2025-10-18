@@ -9,6 +9,7 @@ params = {
     'hidden_dim': 100,
     'n_layers': 2
 }
+
 model = CNN(**params)
 model.load_state_dict(torch.load('model/mnist/mnist_model.pth'))
 model.eval()
