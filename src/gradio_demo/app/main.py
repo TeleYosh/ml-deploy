@@ -13,7 +13,9 @@ params = {
     'n_classes': n_classes
 }
 model = CNN(**params)
-model = torch.load("../model/sketch_images/weights/cnn.pth", map_location="cpu")
+PATH = '../../model/sketch_images/weights/cnn.pth'
+model.load_state_dict(torch.load(PATH))
+# model = torch.load("../model/sketch_images/weights/cnn.pth", map_location="cpu")
 model.eval()
 
 # def predict(img):
