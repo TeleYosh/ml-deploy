@@ -1,7 +1,7 @@
 [project]
-name = "gradio-demo"
+name = "gradio_demo"
 version = "0.1.0"
-description = "Add your description here"
+description = "scketch images classification model"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -14,3 +14,10 @@ dependencies = [
     "torchvision>=0.23.0",
     "tqdm>=4.67.1",
 ]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+package = true

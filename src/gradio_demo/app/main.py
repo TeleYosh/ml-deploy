@@ -1,10 +1,19 @@
 import gradio as gr
 import numpy as np
 import torch 
+from gradio_demo.model.sketch_images.cnn import CNN
 
 
 # Load your model
-model = torch.load("model/sketch-images/weights/cnn.pth", map_location="cpu")
+n_classes = 345
+params = {
+    'n_filters': 30,
+    'hidden_dim': 100,
+    'n_layers': 2,
+    'n_classes': n_classes
+}
+model = CNN(**params)
+model = torch.load("../model/sketch_images/weights/cnn.pth", map_location="cpu")
 model.eval()
 
 # def predict(img):
@@ -30,4 +39,6 @@ model.eval()
 if __name__ == "__main__":
     # gr.serve(demo, reload=True)
     # demo.launch()
-    a = 2
+    a = torch.rand(size=(1, 1, 28, 28))
+    out = model(a)
+    print(out)
