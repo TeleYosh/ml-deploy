@@ -3,6 +3,7 @@ import numpy as np
 import torch 
 import torch.nn.functional as F
 import torchvision.transforms as T
+import json
 from pathlib import Path
 from datasets import load_dataset
 from gradio_demo.model.sketch_images.cnn import CNN
@@ -23,9 +24,9 @@ model.load_state_dict(torch.load(PATH, map_location='cpu'))
 model.eval()
 
 # utils
-dataset = load_dataset("Xenova/quickdraw-small")
-train_dataset = dataset['train']
-names = train_dataset.features['label'].names
+with open('../data/labels.json', 'r') as f:
+    names = json.load(f)
+
 transform = T.Compose([
     T.ToTensor(),                            # (1, H, W), values in [0, 1], white=1 black=0
     T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
@@ -42,7 +43,7 @@ def predict(input_image):
     img = img.unsqueeze(0).to(torch.float32) # add batch dimension
     with torch.no_grad():
         out = model(img)
-    idx = torch.argmax(out).item()
+    # idx = torch.argmax(out).item()
     probs = F.softmax(out, dim=1).squeeze(0)
     res = {names[i]:proba.item() for i, proba in enumerate(probs) }
     return res
@@ -56,7 +57,8 @@ demo = gr.Interface(
         ),
     outputs=gr.Label(num_top_classes=5),
     title="Sketch Recognition model",
-    examples=[]
+    examples=[],
+    live=True
 )
 
 if __name__ == "__main__":
