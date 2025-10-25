@@ -28,47 +28,35 @@ train_dataset = dataset['train']
 names = train_dataset.features['label'].names
 transform = T.Compose([
     T.ToTensor(),                            # (1, H, W), values in [0, 1], white=1 black=0
-    # T.Lambda(lambda x: x/255.0), 
-    T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 ✅
+    T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
     T.Resize((28, 28), interpolation=T.InterpolationMode.BILINEAR),
     # T.Normalize((0.5,), (0.5,))            # optional if your model expects [-1, 1]
 ])
 
-# img_tensor = transform(img)
+# some examples
+# examples_images
 
 def predict(input_image):
     img = input_image['composite']
-    # print(f'img {img.shape} type {type(img)}')
-    # img = img / 255.0
-    # img = torch.from_numpy(img)
-    # print(f'OG image model type {img}')
-    # img = img.unsqueeze(0)
-    # resize = T.Resize((28, 28), interpolation=T.InterpolationMode.BICUBIC, antialias=True)
-    # img = resize(img)
     img = transform(img)
-    print('-'*50)
-    print('-'*50)
-    print(f'type {type(img)} shape {img.shape}')
-    print('-'*50)
-    print('-'*50)
-    print('-'*50)
-    img = img.unsqueeze(0).to(torch.float32)
-    print('-'*50)
-    print(f'before model type {type(img)} shape {img.shape} dtype {img.dtype}')
-    print('-'*50)
-    print('-'*50)
-    print(f'image model type {img}')
-    print('-'*50)
+    img = img.unsqueeze(0).to(torch.float32) # add batch dimension
     with torch.no_grad():
         out = model(img)
     idx = torch.argmax(out).item()
-    return names[idx]
+    probs = F.softmax(out, dim=1).squeeze(0)
+    res = {names[i]:proba.item() for i, proba in enumerate(probs) }
+    return res
 
 demo = gr.Interface(
     fn=predict,
-    inputs=gr.Sketchpad(label="Draw a Digit a khawa diali", image_mode='L'),
-    outputs=gr.Label(num_top_classes=1),
-    title="Digit Classifier"
+    inputs=gr.Sketchpad(
+        label="Draw a sketch",
+        image_mode='L',
+        brush=gr.Brush(default_size=20, default_color='black', colors=['black'], color_mode='fixed')
+        ),
+    outputs=gr.Label(num_top_classes=5),
+    title="Sketch Recognition model",
+    examples=[]
 )
 
 if __name__ == "__main__":
