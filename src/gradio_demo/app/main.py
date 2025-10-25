@@ -26,7 +26,6 @@ model.load_state_dict(torch.load(PATH, map_location='cpu'))
 model.eval()
 
 # utils
-# Get the directory of the current script
 current_dir = Path(__file__).parent
 labels_path = current_dir / '../data/labels.json'
 with open(labels_path, 'r') as f:
@@ -39,12 +38,12 @@ transform = T.Compose([
     # T.Normalize((0.5,), (0.5,))            # optional if your model expects [-1, 1]
 ])
 
-# some examples
 # examples_images
 folder_path = current_dir / '../data/examples_images/'
 file_names = os.listdir(folder_path)
-# print(f'file names {file_names}')
-example_images = [np.array(Image.open(folder_path/image_file)) for image_file in file_names]
+# example_images = [np.array(Image.open(folder_path/image_file)) for image_file in file_names]
+example_images = [[str(folder_path / f)] for f in file_names if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+print("Found images:", file_names)
 
 def predict(input_image):
     img = input_image['composite']
@@ -65,7 +64,7 @@ demo = gr.Interface(
     inputs=gr.Sketchpad(
         label="Draw a sketch",
         image_mode='L',
-        brush=gr.Brush(default_size=20, default_color='black', colors=['black'], color_mode='fixed')
+        brush=gr.Brush(default_size=15, default_color='black', colors=['black'], color_mode='fixed')
         ),
     outputs=gr.Label(num_top_classes=5),
     title="Sketch Recognition model",
@@ -75,4 +74,5 @@ demo = gr.Interface(
 )
 
 if __name__ == "__main__":
-    demo.launch()
+    # demo.launch()
+    demo.launch(server_name="0.0.0.0", server_port=7860, root_path="/gradio")
