@@ -5,6 +5,7 @@ from torch.nn import Module
 from torch import Tensor
 from sklearn.metrics import precision_recall_fscore_support
 from tqdm import tqdm
+import math as m
 
 def train(model, trainLoader, testLoader, criterion, optimizer, n_epochs, device):
     train_losses = []
@@ -119,3 +120,8 @@ def get_validation_metrics(
 
     return metrics
 
+def output_conv_size(height, width, conv_kernelsize,maxpool_kernel_size, n_filters):
+    '''
+    Give size of tensor after convolutions and maxpoolings.
+    '''
+    return 2*n_filters* m.floor((m.floor((height-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)*m.floor((m.floor((width-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)
