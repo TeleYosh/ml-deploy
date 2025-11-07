@@ -39,3 +39,8 @@ clearBtn.addEventListener('click', () => {
   fileInput.value = ''; // reset the file input
 });
 
+// current time
+const time = new Date();
+const footer = document.querySelector('.copyright');
+footer.textContent += time.toDateString();
+

@@ -16,23 +16,48 @@
         </div>
     </div>
 
-    <div class="container">
-        <h1>Sketch recognition model</h1>
-        <div class="window">
-            <label for="avatar" class="upload-label">
-                <div class="text">Upload an image</div> 
-                <img src="images/cloud-icon.png" alt="cloud upload icon" >
-            </label>
-            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+    <div class="large-container">
+        <div class="container">
+            <h1>Sketch recognition model</h1>
+            <div class="window">
+                <label for="avatar" class="upload-label">
+                    <div class="text">Upload an image</div> 
+                    <img src="images/cloud-icon.png" alt="cloud upload icon" >
+                </label>
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+            </div>
+            <div class="actions">
+                <button class="clear">Clear</button>
+                <button class="predict">Predict</button>
+            </div>
         </div>
-        <div class="actions">
-            <button class="clear">Clear</button>
-            <button class="predict">Predict</button>
+        <div class="output">
+            <div class="result">
+                Predicted class is: police car
+            </div>
+            <div class="item one">
+                <div class="bar one">
+                    --------
+                </div>
+                <div class="bottom one">
+                    <div class="label one">car</div>
+                    <div class="proba one">80</div>
+                </div>
+            </div>
+            <div class="item two">
+                <div class="bar two">
+                    ------
+                </div>
+                <div class="bottom two">
+                    <div class="label two">umbrella</div>
+                    <div class="proba two">20</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="footer">
-        <div class="copyright">Made with ❤️ by 7amid</div>
+        <div class="copyright">Last time updated: </div>
     </div>
     
 </body>
