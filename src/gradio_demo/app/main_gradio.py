@@ -11,7 +11,7 @@ from gradio_demo.model.sketch_images.cnn import CNN
 from PIL import Image
 
 
-# Load your model
+# Load torch model
 n_classes = 345
 params = {
     'n_filters': 30,

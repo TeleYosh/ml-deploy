@@ -1,8 +1,9 @@
 const fileInput = document.getElementById('avatar');
 const windowDiv = document.querySelector('.window');
 const uploadLabel = document.querySelector('.upload-label');
+const output = document.querySelector('.output');
 
-// Listen for file selection
+// upload button
 fileInput.addEventListener('change', () => {
   const file = fileInput.files[0];
   if (!file) return;
@@ -30,8 +31,8 @@ fileInput.addEventListener('change', () => {
   windowDiv.appendChild(img);
 });
 
+// clear button
 const clearBtn = document.querySelector('.clear');
-
 clearBtn.addEventListener('click', () => {
   const preview = document.querySelector('.preview-image');
   if (preview) preview.remove();
@@ -39,7 +40,39 @@ clearBtn.addEventListener('click', () => {
   fileInput.value = ''; // reset the file input
 });
 
-// current time
+// prediction button
+const predBtn = document.querySelector('.predict');
+predBtn.addEventListener('click', async () => {
+  const file = fileInput.files[0];
+  if (!file) {
+    alert('Please upload an image first.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await fetch('http://127.0.0.1:8000/predict', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Prediction request failed.');
+    }
+
+    const result = await response.json();
+    output.innerHTML = '';
+    output.textContent = result.prediction;
+    // alert(`Prediction: ${result.prediction}`);
+  } catch (err) {
+    console.error(err);
+    alert('Error during prediction.');
+  }
+});
+
+// current time for footer
 const time = new Date();
 const footer = document.querySelector('.copyright');
 footer.textContent += time.toDateString();
