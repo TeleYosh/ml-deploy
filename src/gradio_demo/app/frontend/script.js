@@ -63,9 +63,11 @@ predBtn.addEventListener('click', async () => {
     }
 
     const result = await response.json();
-    output.innerHTML = '';
-    output.textContent = result.prediction;
-    // alert(`Prediction: ${result.prediction}`);
+    const labelEl = output.querySelector('.label');
+    const probaEl = output.querySelector('.proba');
+    labelEl.textContent = result.prediction;
+    probaEl.textContent = `${(result.proba * 100).toFixed(1)}%`;
+    // console.log(`tibari ya khoya ${result.proba}`)
   } catch (err) {
     console.error(err);
     alert('Error during prediction.');

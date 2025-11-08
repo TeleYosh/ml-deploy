@@ -5,6 +5,7 @@ from pathlib import Path
 from gradio_demo.model.sketch_images.cnn import CNN
 import torch
 import torchvision.transforms as T
+import torch.nn.functional as F
 import json
 import io
 
@@ -41,7 +42,7 @@ with open(labels_path, 'r') as f:
 
 transform = T.Compose([
     T.ToTensor(),                            # (1, H, W), values in [0, 1], white=1 black=0
-    # T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
+    T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
     T.Resize((28, 28), interpolation=T.InterpolationMode.BILINEAR),
     # T.Normalize((0.5,), (0.5,))            # optional if your model expects [-1, 1]
 ])
@@ -54,4 +55,9 @@ async def predict(file: UploadFile = File(...)):
     with torch.no_grad():
         out = model(img)
     idx = torch.argmax(out).item()
-    return {'prediction': names[idx]}
+    probs = F.softmax(out, dim=1).squeeze(0)
+    # res = {names[i]:proba.item() for i, proba in enumerate(probs)}
+    return {
+        'prediction': names[idx],
+        'proba': probs[idx].item()
+        }
