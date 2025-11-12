@@ -19,18 +19,22 @@
     <div class="large-container">
         <div class="container">
             <h1>Sketch recognition model</h1>
-            <div class="window">
+            <!-- <div class="window">
                 <label for="avatar" class="upload-label">
                     <div class="text">Upload an image</div> 
                     <img src="images/cloud-icon.png" alt="cloud upload icon" >
                 </label>
                 <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+            </div> -->
+            <div id="sketchpad">
+                <canvas id="myCanvas" width="300" height="300"></canvas>
             </div>
             <div class="actions">
                 <button class="clear">Clear</button>
                 <button class="predict">Predict</button>
             </div>
         </div>
+
         
         <div class="output">
             <div class="title">

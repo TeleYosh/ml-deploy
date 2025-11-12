@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     min-height: 100vh;
     background-color: #fff;
     background-image: linear-gradient(#f6f6f6 1px,transparent 1px),linear-gradient(to right,#f6f6f6 1px,#fff 1px);
@@ -67,7 +68,7 @@ body {
 .large-container {
   display: flex;
   gap: 30px;
-  /* outline: 2px solid blue; */
+  outline: 2px solid blue;
 }
 
 /* output class and probas */
@@ -93,6 +94,26 @@ body {
   justify-content: space-between;
 }
 
+#sketchpad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* outline: 2px solid black; */
+  border-radius: 15px;
+  height: 320px;
+  width: 320px;
+  margin: 20px;
+  /* background-color: black; */
+  background: linear-gradient(120deg, #7fffd4, #40e0d0, #00ced1);
+  box-shadow: 0 0 20px rgba(252, 0, 255, 0.3);
+}
+
+#myCanvas {
+  background-color: white;
+  outline: 1px solid black;
+
+}
+
 /* the canva / upload block */
 .container {
     display: flex;
@@ -100,7 +121,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    /* outline: 2px solid red; */
+    outline: 2px solid red;
 }
 
 .window {
@@ -156,7 +177,7 @@ body {
     display: flex;
     gap: 10px;
     align-items: center;
-    width: 500px;
+    width: 320px;
     height: 70px;
 }
 
@@ -185,5 +206,5 @@ body {
     width: 100%;
     /* outline: 2px solid green; */
     height: 40px;
-    margin-top: auto;
+    /* margin-top: auto; */
 }

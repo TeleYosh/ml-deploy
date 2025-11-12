@@ -42,7 +42,7 @@ with open(labels_path, 'r') as f:
 
 transform = T.Compose([
     T.ToTensor(),                            # (1, H, W), values in [0, 1], white=1 black=0
-    T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
+    # T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
     T.Resize((28, 28), interpolation=T.InterpolationMode.BILINEAR),
     # T.Normalize((0.5,), (0.5,))            # optional if your model expects [-1, 1]
 ])
@@ -51,7 +51,9 @@ transform = T.Compose([
 async def predict(file: UploadFile = File(...)):
     contents = await file.read()
     image = Image.open(io.BytesIO(contents)).convert('L')
+    print(f'image {image}')
     img = transform(image).unsqueeze(0).to(torch.float32) 
+    print(f'image {img}')
     with torch.no_grad():
         out = model(img)
     idx = torch.argmax(out).item()
