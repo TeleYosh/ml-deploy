@@ -9,8 +9,8 @@ const clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   clear_result = {
-    'prediction': 'No drawing detected',
-    'proba':1
+    'prediction': [],
+    'proba':[]
   };
   updateOutput(clear_result);
 });
@@ -105,14 +105,66 @@ canvas.addEventListener('mousemove', (e) => {
 // change output div
 const output = document.querySelector('.output');
 
+// function updateOutput(result) {
+//   // const labelEl = output.querySelector('.label');
+//   // const probaEl = output.querySelector('.proba');
+//   // const bar = output.querySelector('.bar');
+//   // labelEl.textContent = result.prediction;
+//   // probaEl.textContent = `${(result.proba * 100).toFixed(1)}%`;
+//   // bar.style.width = probaEl.textContent
+
+//   // add top 5 k guesses
+//   const item_one = output.querySelector('.item');
+//   const labels = result.labels 
+//   const probas = result.probas
+//   for (let i=0; i<5; i++){
+//     const item = item_one.cloneNode(true);
+//     item.pred.label.textContent = labels[i];
+//     item.pred.proba.textContent = `${(probas[i] * 100).toFixed(1)}%`;
+//     item.bar.style.width = probaEl.textContent
+//   }
+// }
+
 function updateOutput(result) {
-  const labelEl = output.querySelector('.label');
-  const probaEl = output.querySelector('.proba');
-  const bar = output.querySelector('.bar');
-  labelEl.textContent = result.prediction;
-  probaEl.textContent = `${(result.proba * 100).toFixed(1)}%`;
-  bar.style.width = probaEl.textContent
+  const output = document.querySelector('.output');
+  const title = output.querySelector('.title');
+
+  // Clear any old prediction items (keep the title/type headers)
+  const oldItems = output.querySelectorAll('.item');
+  oldItems.forEach((item, idx) => {
+    if (idx > 0) item.remove(); // keep the first template item
+  });
+
+  const template = output.querySelector('.item');
+  const labels = result.predictions || [];
+  const probas = result.probas || [];
+
+  if (labels.length === 0) {
+    title.textContent = 'No drawing detected';
+    template.querySelector('.label').textContent = 'No drawing detected';
+    template.querySelector('.proba').textContent = '100%';
+    template.querySelector('.bar').style.width = '100%';
+    return;
+  }
+
+  // Update the first (template) item
+  template.querySelector('.label').textContent = labels[0];
+  template.querySelector('.proba').textContent = `${(probas[0] * 100).toFixed(1)}%`;
+  template.querySelector('.bar').style.width = `${(probas[0] * 100).toFixed(1)}%`;
+
+  // Clone and populate additional items for top 5
+  for (let i = 1; i < Math.min(5, labels.length); i++) {
+    const clone = template.cloneNode(true);
+    clone.querySelector('.label').textContent = labels[i];
+    clone.querySelector('.proba').textContent = `${(probas[i] * 100).toFixed(1)}%`;
+    clone.querySelector('.bar').style.width = `${(probas[i] * 100).toFixed(1)}%`;
+    output.appendChild(clone);
+  }
+
+  // Update title text
+  title.textContent = `Top prediction: ${labels[0]} (${(probas[0] * 100).toFixed(1)}%)`;
 }
+
 
 
 // current time for footer

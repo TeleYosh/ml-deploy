@@ -53,22 +53,20 @@ transform = T.Compose([
 async def predict(file: UploadFile = File(...)):
     contents = await file.read()
     image = Image.open(io.BytesIO(contents)).convert('L')
-    # img = transform(image).unsqueeze(0).to(torch.float32) 
-    # Save original image for debugging
-    # debug_dir = Path("../..") / 'debug_images'
-    # debug_dir.mkdir(exist_ok=True)
-    # image.save(debug_dir / "original.png")
-
-    # Transform and save transformed image
     img = transform(image).unsqueeze(0).to(torch.float32)
-    # vutils.save_image(img, debug_dir / "transformed.png")
 
     with torch.no_grad():
         out = model(img)
     idx = torch.argmax(out).item()
     probs = F.softmax(out, dim=1).squeeze(0)
-    # res = {names[i]:proba.item() for i, proba in enumerate(probs)}
+    res = {names[i]:proba.item() for i, proba in enumerate(probs)}
+    top5_names = sorted(res, key=lambda x:res[x], reverse=True)[:5]
+    top5_probas = [res[name] for name in  top5_names]
+    # return {
+    #     'prediction': names[idx],
+    #     'proba': probs[idx].item()
+    #     }
     return {
-        'prediction': names[idx],
-        'proba': probs[idx].item()
-        }
+        'predictions': top5_names,
+        'probas': top5_probas
+    }
