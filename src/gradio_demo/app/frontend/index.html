@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>Sketch Recognition Model</title>
+</head>
+<body>
+    <div class="header">
+        <button class="home">Home</button>
+        <div class="right-side">
+            <button class="models">Models</button>
+            <button class="theme">Theme</button>
+        </div>
+    </div>
+
+    <div class="large-container">
+        <div class="container">
+            <h1>Sketch recognition model</h1>
+            <div id="sketchpad">
+                <canvas id="myCanvas" width="400" height="400"></canvas>
+            </div>
+            <div class="actions">
+                <button class="clear">Clear</button>
+                <button class="predict" type="button">Predict</button>
+            </div>
+        </div>
+
+        
+        <div class="output">
+            <div class="type">output</div>
+            <div class="title">
+                No drawing detected
+            </div>
+            <div class="item">
+                <div class="bar"></div>
+                <div class="pred">
+                    <span class="label">No drawing detected</span>
+                    <span class="dots"></span>
+                    <span class="proba">100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="copyright">Last time updated: </div>
+    </div>
+    
+</body>
+</html>

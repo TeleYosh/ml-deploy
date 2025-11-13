@@ -688,6 +688,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "datasets" },
+    { name = "fastapi" },
     { name = "gradio" },
     { name = "ipykernel" },
     { name = "matplotlib" },
@@ -701,6 +702,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "datasets", specifier = ">=4.2.0" },
+    { name = "fastapi", specifier = ">=0.119.0" },
     { name = "gradio", specifier = ">=5.49.1" },
     { name = "ipykernel", specifier = ">=6.30.1" },
     { name = "matplotlib", specifier = ">=3.10.7" },
