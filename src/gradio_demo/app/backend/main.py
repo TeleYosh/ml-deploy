@@ -3,11 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 from pathlib import Path
 from gradio_demo.model.sketch_images.cnn import CNN
+
 import torch
 import torchvision.transforms as T
 import torch.nn.functional as F
 import json
 import io
+import torchvision.utils as vutils
 
 app = FastAPI()
 
@@ -42,7 +44,7 @@ with open(labels_path, 'r') as f:
 
 transform = T.Compose([
     T.ToTensor(),                            # (1, H, W), values in [0, 1], white=1 black=0
-    # T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
+    T.Lambda(lambda x: 1.0 - x),             # invert -> white=0, black=1 
     T.Resize((28, 28), interpolation=T.InterpolationMode.BILINEAR),
     # T.Normalize((0.5,), (0.5,))            # optional if your model expects [-1, 1]
 ])
@@ -51,9 +53,16 @@ transform = T.Compose([
 async def predict(file: UploadFile = File(...)):
     contents = await file.read()
     image = Image.open(io.BytesIO(contents)).convert('L')
-    print(f'image {image}')
-    img = transform(image).unsqueeze(0).to(torch.float32) 
-    print(f'image {img}')
+    # img = transform(image).unsqueeze(0).to(torch.float32) 
+    # Save original image for debugging
+    # debug_dir = Path("../..") / 'debug_images'
+    # debug_dir.mkdir(exist_ok=True)
+    # image.save(debug_dir / "original.png")
+
+    # Transform and save transformed image
+    img = transform(image).unsqueeze(0).to(torch.float32)
+    # vutils.save_image(img, debug_dir / "transformed.png")
+
     with torch.no_grad():
         out = model(img)
     idx = torch.argmax(out).item()

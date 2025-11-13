@@ -1,6 +1,6 @@
-const fileInput = document.getElementById('avatar');
-const windowDiv = document.querySelector('.window');
-const uploadLabel = document.querySelector('.upload-label');
+// const fileInput = document.getElementById('avatar');
+// const windowDiv = document.querySelector('.window');
+// const uploadLabel = document.querySelector('.upload-label');
 const output = document.querySelector('.output');
 
 
@@ -13,6 +13,10 @@ clearBtn.addEventListener('click', () => {
 // prediction button
 const predBtn = document.querySelector('.predict');
 predBtn.addEventListener('click', async () => {
+  ctx.globalCompositeOperation = 'destination-over';
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.globalCompositeOperation = 'source-over';
   const formData = new FormData();
   const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'))
   formData.append('file', blob, 'drawing.png');
@@ -41,11 +45,11 @@ const ctx = canvas.getContext('2d');
 const canvasOffSetX = canvas.offsetLeft;
 const canvasOffSetY = canvas.offsetTop;
 console.log(`offset x ${canvasOffSetX} offset y ${canvasOffSetY}`)
-canvas.width = 300;
-canvas.height = 300;
+canvas.width = 400;
+canvas.height = 400;
 
 let isPainting = false;
-let lineWidth = 25;
+let lineWidth = 15;
 let startX;
 let startY;
 
@@ -67,8 +71,35 @@ canvas.addEventListener('mouseup', (e) => {
   isPainting = false;
   ctx.stroke();
   ctx.beginPath();
+  predBtn.click();
 });
 canvas.addEventListener('mousemove', draw);
+
+// --- Pen preview ---
+const penPreview = document.createElement('div');
+penPreview.style.position = 'absolute';
+penPreview.style.width = `${lineWidth}px`;
+penPreview.style.height = `${lineWidth}px`;
+penPreview.style.border = '2px solid gray';
+penPreview.style.borderRadius = '50%';
+penPreview.style.pointerEvents = 'none'; // let mouse pass through
+penPreview.style.display = 'none';
+penPreview.style.zIndex = '1000';
+document.body.appendChild(penPreview);
+
+canvas.addEventListener('mouseenter', () => {
+  penPreview.style.display = 'block';
+});
+canvas.addEventListener('mouseleave', () => {
+  penPreview.style.display = 'none';
+});
+canvas.addEventListener('mousemove', (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+  penPreview.style.left = `${x - lineWidth / 2}px`;
+  penPreview.style.top = `${y - lineWidth / 2}px`;
+});
+
 
 
 // current time for footer
