@@ -57,6 +57,7 @@ body {
 
 .right-side {
     display: flex;
+    display: none;
     gap: 10px;
     margin-right: 10px;
     justify-content: center;
@@ -66,36 +67,12 @@ body {
 }
 
 /* middle part */
-
 .large-container {
   display: flex;
   gap: 30px;
-  /* outline: 2px solid blue; */
 }
 
-/* output class and probas */
-.output {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  margin: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  outline: 2px solid gray;
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.output .title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.output .result {
-  display: flex;
-  justify-content: space-between;
-}
-
+/* the canva  */
 #sketchpad {
   display: flex;
   justify-content: center;
@@ -114,7 +91,6 @@ body {
 
 }
 
-/* the canva / upload block */
 .container {
     display: flex;
     flex: 1;
@@ -123,53 +99,7 @@ body {
     gap: 10px;
 }
 
-/* .window {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 500px;
-    height: 300px;
-    margin-left: 40px;
-    margin-right: 40px;
-    outline: 2px solid gray;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
-}
-
-.window label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: darkviolet;
-    font-size: 30px;
-    outline: 2px solid darkviolet;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.upload-label {
-    display: inline-block;
-    cursor: pointer;
-  }
-
-.upload-label img {
-    height: 30px;
-    object-fit: contain;
-    transition: transform 0.2s ease;
-  }
-
-.upload-label:hover {
-    transform: scale(1.05);
-    background-color: rgba(0, 0, 0, 0.15);
-  }
-
-#avatar {
-    display: none;
-} */
-
+/* action buttons */
 .actions {
     display: flex;
     gap: 10px;
@@ -193,8 +123,75 @@ body {
     transform: scale(1.05);
 }
 
-/* footer */
+/* output class and probas */
+.output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start; /* to avoid streching behavior */
+  width: 450px;
+  margin-top: 112px;
+  /* padding: 10px; */
+  border-radius: 5px;
+  outline: 2px solid gray;
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
+.output .type {
+  align-self: flex-start;
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+  background-color: rgb(128, 128, 128);
+  outline: 2px solid gray;
+}
+
+.output .title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  /* outline: 2px solid black; */
+}
+
+.output .item-one {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  margin: 8px;
+  gap: 10px;
+  font-size: 20px;
+  /* outline: 2px solid blue; */
+}
+
+.output .bar {
+  background-color: #00ced1;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+  /* margin: 5px; */
+}
+
+.output .pred-one {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  /* outline: 2px solid black; */
+}
+
+.output .label {
+  font-weight: bold;
+}
+
+.pred-one .dots {
+  flex-grow: 1;
+  border-bottom: 2px dotted black;
+  margin: 0 10px; /* spacing between label and percentage */
+  margin-top: 10px;
+  height: 0;
+}
+
+/* footer */
 .footer {
     display: flex;
     align-items: center;

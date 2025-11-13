@@ -1,18 +1,24 @@
-// const fileInput = document.getElementById('avatar');
-// const windowDiv = document.querySelector('.window');
-// const uploadLabel = document.querySelector('.upload-label');
-const output = document.querySelector('.output');
-
+// home button for refresh
+const homeBtn = document.querySelector('.home');
+homeBtn.addEventListener('click', (e) => {
+  window.location.reload();
+})
 
 // clear button
 const clearBtn = document.querySelector('.clear');
 clearBtn.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  clear_result = {
+    'prediction': 'No drawing detected',
+    'proba':1
+  };
+  updateOutput(clear_result);
 });
 
 // prediction button
 const predBtn = document.querySelector('.predict');
 predBtn.addEventListener('click', async () => {
+  // add white background
   ctx.globalCompositeOperation = 'destination-over';
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -29,10 +35,7 @@ predBtn.addEventListener('click', async () => {
       throw new Error('Prediction request failed.');
     }
     const result = await response.json();
-    const labelEl = output.querySelector('.label');
-    const probaEl = output.querySelector('.proba');
-    labelEl.textContent = result.prediction;
-    probaEl.textContent = `${(result.proba * 100).toFixed(1)}%`;
+    updateOutput(result);
   } catch (err) {
     console.error(err);
     alert('Error during prediction.');
@@ -44,7 +47,6 @@ const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 const canvasOffSetX = canvas.offsetLeft;
 const canvasOffSetY = canvas.offsetTop;
-console.log(`offset x ${canvasOffSetX} offset y ${canvasOffSetY}`)
 canvas.width = 400;
 canvas.height = 400;
 
@@ -100,6 +102,17 @@ canvas.addEventListener('mousemove', (e) => {
   penPreview.style.top = `${y - lineWidth / 2}px`;
 });
 
+// change output div
+const output = document.querySelector('.output');
+
+function updateOutput(result) {
+  const labelEl = output.querySelector('.label');
+  const probaEl = output.querySelector('.proba');
+  const bar = output.querySelector('.bar');
+  labelEl.textContent = result.prediction;
+  probaEl.textContent = `${(result.proba * 100).toFixed(1)}%`;
+  bar.style.width = probaEl.textContent
+}
 
 
 // current time for footer

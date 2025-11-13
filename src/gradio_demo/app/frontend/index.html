@@ -19,13 +19,6 @@
     <div class="large-container">
         <div class="container">
             <h1>Sketch recognition model</h1>
-            <!-- <div class="window">
-                <label for="avatar" class="upload-label">
-                    <div class="text">Upload an image</div> 
-                    <img src="images/cloud-icon.png" alt="cloud upload icon" >
-                </label>
-                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
-            </div> -->
             <div id="sketchpad">
                 <canvas id="myCanvas" width="400" height="400"></canvas>
             </div>
@@ -37,12 +30,17 @@
 
         
         <div class="output">
+            <div class="type">output</div>
             <div class="title">
-                Predicted class is:
+                No drawing detected
             </div>
-            <div class="result">
-                <div class="label">police car</div>
-                <div class="proba">34%</div>
+            <div class="item-one">
+                <div class="bar"></div>
+                <div class="pred-one">
+                    <span class="label">No drawing detected</span>
+                    <span class="dots"></span>
+                    <span class="proba">100%</span>
+                </div>
             </div>
         </div>
     </div>
