@@ -27,7 +27,8 @@ predBtn.addEventListener('click', async () => {
   const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'))
   formData.append('file', blob, 'drawing.png');
   try {
-    const response = await fetch('http://127.0.0.1:8000/predict', {
+    // const response = await fetch('http://127.0.0.1:8000/predict', {
+    const response = await fetch('sketch/api/predict', {
       method: 'POST',
       body: formData
     });
@@ -164,8 +165,6 @@ function updateOutput(result) {
   // Update title text
   title.textContent = `Top prediction: ${labels[0]} (${(probas[0] * 100).toFixed(1)}%)`;
 }
-
-
 
 // current time for footer
 const time = new Date();
