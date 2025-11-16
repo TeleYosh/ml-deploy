@@ -27,8 +27,8 @@ predBtn.addEventListener('click', async () => {
   const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'))
   formData.append('file', blob, 'drawing.png');
   try {
-    // const response = await fetch('http://127.0.0.1:8000/predict', {
-    const response = await fetch('sketch/api/predict', {
+    const response = await fetch('http://127.0.0.1:8000/predict', {
+    // const response = await fetch('sketch/api/predict', {
       method: 'POST',
       body: formData
     });
@@ -46,8 +46,6 @@ predBtn.addEventListener('click', async () => {
 // canvas
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
-const canvasOffSetX = canvas.offsetLeft;
-const canvasOffSetY = canvas.offsetTop;
 canvas.width = 400;
 canvas.height = 400;
 
@@ -60,15 +58,19 @@ const draw = (e) => {
   if (!isPainting) {
     return;
   }
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
   ctx.lineWidth = lineWidth;
   ctx.lineCap = 'round';
-  ctx.lineTo(e.clientX-canvasOffSetX, e.clientY-canvasOffSetY);
+  ctx.lineTo(x, y);
   ctx.stroke();
 }
 canvas.addEventListener('mousedown', (e) => {
   isPainting = true;
-  startX = e.clientX;
-  startY = e.clientY;
+  const rect = canvas.getBoundingClientRect();
+  startX = e.clientX - rect.left;
+  startY = e.clientY - rect.top;
 });
 canvas.addEventListener('mouseup', (e) => {
   isPainting = false;
@@ -105,27 +107,6 @@ canvas.addEventListener('mousemove', (e) => {
 
 // change output div
 const output = document.querySelector('.output');
-
-// function updateOutput(result) {
-//   // const labelEl = output.querySelector('.label');
-//   // const probaEl = output.querySelector('.proba');
-//   // const bar = output.querySelector('.bar');
-//   // labelEl.textContent = result.prediction;
-//   // probaEl.textContent = `${(result.proba * 100).toFixed(1)}%`;
-//   // bar.style.width = probaEl.textContent
-
-//   // add top 5 k guesses
-//   const item_one = output.querySelector('.item');
-//   const labels = result.labels 
-//   const probas = result.probas
-//   for (let i=0; i<5; i++){
-//     const item = item_one.cloneNode(true);
-//     item.pred.label.textContent = labels[i];
-//     item.pred.proba.textContent = `${(probas[i] * 100).toFixed(1)}%`;
-//     item.bar.style.width = probaEl.textContent
-//   }
-// }
-
 function updateOutput(result) {
   const output = document.querySelector('.output');
   const title = output.querySelector('.title');

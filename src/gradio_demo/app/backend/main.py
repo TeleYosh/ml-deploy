@@ -70,3 +70,7 @@ async def predict(file: UploadFile = File(...)):
         'predictions': top5_names,
         'probas': top5_probas
     }
+
+@app.get("/")
+async def root():
+    return {"message": "FastAPI backend is running."}
