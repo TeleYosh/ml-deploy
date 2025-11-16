@@ -11,7 +11,7 @@ import json
 import io
 import torchvision.utils as vutils
 
-app = FastAPI()
+app = FastAPI(root_path='/sketch')
 
 # allow requests from frontend - Need to understand it later
 app.add_middleware(
