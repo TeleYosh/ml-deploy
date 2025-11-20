@@ -120,8 +120,8 @@ def get_validation_metrics(
 
     return metrics
 
-def output_conv_size(height, width, conv_kernelsize,maxpool_kernel_size, n_filters):
+def output_conv_size(height, width, conv_kernel_size,maxpool_kernel_size, n_filters):
     '''
     Give size of tensor after convolutions and maxpoolings.
     '''
-    return 2*n_filters* m.floor((m.floor((height-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)*m.floor((m.floor((width-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)-conv_kernelsize+1-maxpool_kernel_size)/maxpool_kernel_size+1)
+    return 2*n_filters* m.floor((m.floor((height-conv_kernel_size+1-maxpool_kernel_size)/maxpool_kernel_size+1)-conv_kernel_size+1-maxpool_kernel_size)/maxpool_kernel_size+1)*m.floor((m.floor((width-conv_kernel_size+1-maxpool_kernel_size)/maxpool_kernel_size+1)-conv_kernel_size+1-maxpool_kernel_size)/maxpool_kernel_size+1)
