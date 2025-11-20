@@ -14,6 +14,12 @@ body {
     background-size: 20px 20px;
 }
 
+/* ADD */
+body {
+  overflow-x: hidden;
+}
+
+
 .header {
   display: flex;
   align-items: center;
@@ -67,6 +73,20 @@ body {
     /* outline: 2px solid black; */
 }
 
+/* ADD */
+@media (max-width: 900px) {
+  .large-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .output {
+    width: 90%;
+    margin-top: 30px;
+  }
+}
+
+
 /* middle part */
 .large-container {
   display: flex;
@@ -79,13 +99,28 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  height: 420px;
-  width: 420px;
+  /* height: 420px; */
+  /* width: 420px; */
   margin: 20px;
   /* background: linear-gradient(120deg, #7fffd4, #40e0d0, #00ced1); */
   background: linear-gradient(to right bottom, #ec8c03, #f19501, #f69e00, #fba800, #ffb100);
   box-shadow: 0 0 20px rgba(252, 0, 255, 0.3);
 }
+
+/* MODIFY */
+#sketchpad {
+  width: 90%;
+  max-width: 420px;
+  height: auto;
+  padding: 10px;
+}
+
+/* ADD */
+#myCanvas {
+  width: 100%;
+  height: auto;
+}
+
 
 #myCanvas {
   background-color: white;
@@ -139,10 +174,20 @@ body {
   width: 450px;
   margin-top: 112px;
   /* padding: 10px; */
+  margin-bottom: 30px;
   border-radius: 5px;
   outline: 2px solid gray;
   background-color: rgba(0, 0, 0, 0.05);
 }
+
+/* ADD */
+.output .title,
+.output .label,
+.output .proba {
+  word-wrap: break-word;
+  text-align: center;
+}
+
 
 .output .type {
   align-self: flex-start;

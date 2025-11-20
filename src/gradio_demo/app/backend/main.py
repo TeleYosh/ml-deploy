@@ -62,10 +62,6 @@ async def predict(file: UploadFile = File(...)):
     res = {names[i]:proba.item() for i, proba in enumerate(probs)}
     top5_names = sorted(res, key=lambda x:res[x], reverse=True)[:5]
     top5_probas = [res[name] for name in  top5_names]
-    # return {
-    #     'prediction': names[idx],
-    #     'proba': probs[idx].item()
-    #     }
     return {
         'predictions': top5_names,
         'probas': top5_probas
@@ -73,4 +69,4 @@ async def predict(file: UploadFile = File(...)):
 
 @app.get("/")
 async def root():
-    return {"message": "FastAPI backend is running."}
+    return {"message": "FastAPI backend is running.\n"}
