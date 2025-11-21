@@ -148,7 +148,6 @@ body {
 .actions button {
     cursor: pointer;
     flex: 1;
-    /* background: linear-gradient(120deg, #7fffd4, #40e0d0, #00ced1); */
     background: linear-gradient(to right bottom, #ec8c03, #f19501, #f69e00, #fba800, #ffb100);
     box-shadow: 0 0 20px rgba(252, 0, 255, 0.3);
     font-size: 20px;
@@ -173,7 +172,6 @@ body {
   align-self: flex-start; /* to avoid streching behavior */
   width: 450px;
   margin-top: 112px;
-  /* padding: 10px; */
   margin-bottom: 30px;
   border-radius: 5px;
   outline: 2px solid gray;
@@ -203,7 +201,6 @@ body {
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
-  /* outline: 2px solid black; */
 }
 
 .output .item {
@@ -214,16 +211,13 @@ body {
   margin: 8px;
   gap: 10px;
   font-size: 20px;
-  /* outline: 2px solid blue; */
 }
 
 .output .bar {
-  /* background-color: #00ced1; */
   background: linear-gradient(to right bottom, #ec8c03, #f19501, #f69e00, #fba800, #ffb100);
   border-radius: 10px;
   height: 10px;
   width: 100%;
-  /* margin: 5px; */
 }
 
 .output .pred {
@@ -250,10 +244,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background: linear-gradient(120deg, #7fffd4, #40e0d0, #00ced1); */
     background: linear-gradient(to right bottom, #ec8c03, #f19501, #f69e00, #fba800, #ffb100);
-    width: 100%;
-    /* outline: 2px solid green; */
+    width: 100vw;
     height: 40px;
-    /* margin-top: auto; */
 }

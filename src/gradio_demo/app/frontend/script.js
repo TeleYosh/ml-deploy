@@ -54,31 +54,60 @@ let lineWidth = 15;
 let startX;
 let startY;
 
+const getCoordinates = (e) => {
+  const rect = canvas.getBoundingClientRect();
+  if (e.touches && e.touches.length > 0) {
+    return {
+      x: e.touches[0].clientX - rect.left,
+      y: e.touches[0].clientY - rect.top
+    }
+  }
+  else {
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    }
+  }
+}
+
 const draw = (e) => {
   if (!isPainting) {
     return;
   }
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  e.preventDefault();
+  const coords = getCoordinates(e)
   ctx.lineWidth = lineWidth;
   ctx.lineCap = 'round';
-  ctx.lineTo(x, y);
+  ctx.lineTo(coords.x, coords.y);
   ctx.stroke();
 }
-canvas.addEventListener('mousedown', (e) => {
+
+const startDrawing = (e) => {
   isPainting = true;
-  const rect = canvas.getBoundingClientRect();
-  startX = e.clientX - rect.left;
-  startY = e.clientY - rect.top;
-});
-canvas.addEventListener('mouseup', (e) => {
+  const coords = getCoordinates(e);
+  startX = coords.x;
+  startY = coords.y;
+  ctx.beginPath();
+  ctx.moveTo(startX, startY);
+}
+
+const stopDrawing = (e) => {
+  if (!isPainting) return;
   isPainting = false;
   ctx.stroke();
   ctx.beginPath();
   predBtn.click();
-});
+}
+
+// Mouse events
+canvas.addEventListener('mousedown', startDrawing)
+canvas.addEventListener('mouseup', stopDrawing)
 canvas.addEventListener('mousemove', draw);
+// Touch screen events
+canvas.addEventListener('touchstart', startDrawing);
+canvas.addEventListener('touchend', stopDrawing);
+canvas.addEventListener('touchmove', draw);
+
 
 // --- Pen preview ---
 const penPreview = document.createElement('div');
@@ -104,6 +133,8 @@ canvas.addEventListener('mousemove', (e) => {
   penPreview.style.left = `${x - lineWidth / 2}px`;
   penPreview.style.top = `${y - lineWidth / 2}px`;
 });
+
+
 
 // change output div
 const output = document.querySelector('.output');
