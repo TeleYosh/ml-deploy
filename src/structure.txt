@@ -1,0 +1,57 @@
+src
+├── gradio_demo
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   └── __init__.cpython-313.pyc
+│   ├── app
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── backend
+│   │   │   ├── __pycache__
+│   │   │   │   └── main.cpython-313.pyc
+│   │   │   └── main.py
+│   │   └── frontend
+│   │       ├── images
+│   │       │   ├── cloud-icon.png
+│   │       │   ├── goku.png
+│   │       │   └── umbrela.png
+│   │       ├── index.html
+│   │       ├── script.js
+│   │       └── styles.css
+│   ├── data
+│   │   ├── examples_images
+│   │   │   ├── eye.png
+│   │   │   ├── smiley_face.png
+│   │   │   ├── sun.png
+│   │   │   └── umbrela.png
+│   │   └── labels.json
+│   ├── ideas.md
+│   └── model
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-313.pyc
+│       │   └── utils.cpython-313.pyc
+│       ├── sketch_images
+│       │   ├── __init__.py
+│       │   ├── __pycache__
+│       │   │   ├── __init__.cpython-313.pyc
+│       │   │   └── cnn.cpython-313.pyc
+│       │   ├── cnn.py
+│       │   ├── end2end.ipynb
+│       │   ├── labels.json
+│       │   ├── sketch.ipynb
+│       │   ├── training.py
+│       │   ├── training_notebook_thomas.ipynb
+│       │   └── weights
+│       │       ├── cnn.pth
+│       │       └── cnn_3_conv_64.pth
+│       └── utils.py
+├── gradio_demo.egg-info
+│   ├── PKG-INFO
+│   ├── SOURCES.txt
+│   ├── dependency_links.txt
+│   ├── requires.txt
+│   └── top_level.txt
+└── structure.txt
+
+16 directories, 39 files
