@@ -46,8 +46,21 @@ predBtn.addEventListener('click', async () => {
 // canvas
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = 400;
-canvas.height = 400;
+function resizeCanvas() {
+  const sketchpad = document.getElementById('sketchpad');
+  const sketchpadStyles = window.getComputedStyle(sketchpad);
+  const sketchpadPadding = parseFloat(sketchpadStyles.paddingLeft) + parseFloat(sketchpadStyles.paddingRight);
+  
+  // Get actual sketchpad width and subtract padding
+  const availableWidth = sketchpad.clientWidth - sketchpadPadding;
+  const size = Math.min(availableWidth, 400);
+  
+  canvas.width = size;
+  canvas.height = size;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 let isPainting = false;
 let lineWidth = 15;

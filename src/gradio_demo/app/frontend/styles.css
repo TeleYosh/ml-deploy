@@ -102,7 +102,6 @@ body {
   /* height: 420px; */
   /* width: 420px; */
   margin: 20px;
-  /* background: linear-gradient(120deg, #7fffd4, #40e0d0, #00ced1); */
   background: linear-gradient(to right bottom, #ec8c03, #f19501, #f69e00, #fba800, #ffb100);
   box-shadow: 0 0 20px rgba(252, 0, 255, 0.3);
 }
@@ -113,14 +112,8 @@ body {
   max-width: 420px;
   height: auto;
   padding: 10px;
+  box-sizing: border-box;
 }
-
-/* ADD */
-#myCanvas {
-  width: 100%;
-  height: auto;
-}
-
 
 #myCanvas {
   background-color: white;
@@ -142,6 +135,7 @@ body {
     gap: 10px;
     align-items: center;
     width: 420px;
+    max-width: 80%;
     height: 70px;
 }
 
@@ -248,3 +242,5 @@ body {
     width: 100vw;
     height: 40px;
 }
+
+
