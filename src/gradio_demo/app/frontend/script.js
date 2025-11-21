@@ -121,20 +121,22 @@ penPreview.style.display = 'none';
 penPreview.style.zIndex = '1000';
 document.body.appendChild(penPreview);
 
-canvas.addEventListener('mouseenter', () => {
-  penPreview.style.display = 'block';
-});
-canvas.addEventListener('mouseleave', () => {
-  penPreview.style.display = 'none';
-});
-canvas.addEventListener('mousemove', (e) => {
-  const x = e.clientX;
-  const y = e.clientY;
-  penPreview.style.left = `${x - lineWidth / 2}px`;
-  penPreview.style.top = `${y - lineWidth / 2}px`;
-});
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-
+if (!isTouchDevice){
+  canvas.addEventListener('mouseenter', () => {
+    penPreview.style.display = 'block';
+  });
+  canvas.addEventListener('mouseleave', () => {
+    penPreview.style.display = 'none';
+  });
+  canvas.addEventListener('mousemove', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    penPreview.style.left = `${x - lineWidth / 2}px`;
+    penPreview.style.top = `${y - lineWidth / 2}px`;
+  });
+};
 
 // change output div
 const output = document.querySelector('.output');
