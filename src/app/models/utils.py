@@ -52,7 +52,6 @@ def train(model, trainLoader, testLoader, criterion, optimizer, n_epochs, device
         print(f'epoch {epoch} | train loss {train_loss:.3f} train acc {train_acc:.2f} | test loss {test_loss:.3f} test acc {test_acc:.2f}')
     return train_losses, train_accs, test_losses, test_accs
 
-
 def get_validation_metrics(
     model: Module,
     val_dataset: Dataset,

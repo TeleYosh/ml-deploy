@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import numpy as np
 
 class CNN(nn.Module):
     def __init__(self, n_filters, hidden_dim, n_layers, n_classes):
@@ -30,8 +31,7 @@ class CNN(nn.Module):
         for layer in self.classifier:
             x = layer(x)
         x = self.out_layer(x)
-        return x
-    
+        return x    
 
 class CNN_v2(nn.Module):
     def __init__(

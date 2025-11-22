@@ -3,14 +3,15 @@ import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
 from PIL import Image
-from app.models.cnn import CNN
-from app.backend.config import MODEL_PATH, LABELS_PATH
+from app.models.cnn import CNN, CNN_v2
+from app.backend.config import MODEL_PATH, LABELS_PATH, PARAMS_PATH
 import io
 
 # ---- Load model ----
 n_classes = 345
-params = dict(n_filters=30, hidden_dim=100, n_layers=2, n_classes=n_classes)
-model = CNN(**params)
+with open(PARAMS_PATH, 'r') as f:
+    params = json.load(f)
+model = CNN(**params, n_classes=n_classes)
 model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
 model.eval()
 

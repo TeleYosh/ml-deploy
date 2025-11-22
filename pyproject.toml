@@ -1,5 +1,5 @@
 [project]
-name = "gradio_demo"
+name = "sketch_recognition"
 version = "0.1.0"
 description = "scketch images classification model"
 readme = "README.md"
