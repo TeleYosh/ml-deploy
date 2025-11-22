@@ -6,10 +6,10 @@ import numpy as np
 class CNN(nn.Module):
     def __init__(
         self,
-        n_filters,
-        hidden_dim,
-        n_layers,
         n_classes,
+        n_filters=64,
+        hidden_dim=512,
+        n_layers=2,
         input_shape=(1, 28, 28),
         dropout_rate=0,
     ):
