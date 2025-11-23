@@ -8,8 +8,9 @@ COPY . /app
 
 # Install the application dependencies.
 WORKDIR /app
-RUN uv sync --frozen --no-cache
+ENV UV_PYTORCH_WITHOUT_CUDA=1
+RUN uv sync --no-cache
 
 # Run the application.
 EXPOSE 8000
-CMD ["uvicorn", "app.backend.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD [".venv/bin/uvicorn", "app.backend.api:app", "--host", "0.0.0.0", "--port", "8000"]

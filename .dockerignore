@@ -1,7 +1,20 @@
+# Add to .dockerignore
+.venv/
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+.Python
+.git/
+.gitignore
 *.egg-info/
-*.pth
-*.lock
+dist/
+build/
+*.so
+.DS_Store
+node_modules/
+.pytest_cache/
+.coverage
+htmlcov/
 *.log
+.env
