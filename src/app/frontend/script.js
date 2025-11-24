@@ -194,7 +194,8 @@ function updateOutput(result) {
 }
 
 // current time for footer
-const time = new Date();
+// const time = new Date();
 const footer = document.querySelector('.copyright');
-footer.textContent += time.toDateString();
+// footer.textContent += time.toDateString();
+footer.textContent += 'Nov 2025'
 
