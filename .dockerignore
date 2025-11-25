@@ -1,5 +1,6 @@
 # Add to .dockerignore
 .venv/
+venv/
 __pycache__/
 *.pyc
 *.pyo
@@ -18,3 +19,7 @@ node_modules/
 htmlcov/
 *.log
 .env
+nginx.conf
+docker-compose.yml
+training/
+tests/
