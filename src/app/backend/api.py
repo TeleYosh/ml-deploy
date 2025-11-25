@@ -1,19 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
 from app.backend.inference import predict_image
-from pathlib import Path
 
 app = FastAPI(root_path="/sketch")
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
