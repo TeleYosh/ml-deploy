@@ -1,0 +1,25 @@
+# Add to .dockerignore
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.git/
+.gitignore
+*.egg-info/
+dist/
+build/
+*.so
+.DS_Store
+node_modules/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+.env
+nginx.conf
+docker-compose.yml
+training/
+tests/
