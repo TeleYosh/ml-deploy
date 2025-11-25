@@ -6,15 +6,6 @@ from app.backend.inference import predict_image
 from pathlib import Path
 
 app = FastAPI(root_path="/sketch")
-# app = FastAPI()
-
-# Serve static files (CSS, JS, images)
-static_path = Path(__file__).parent.parent / "frontend"
-app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
-
-
-# Serve static files (JS, CSS)
-# app.mount("/static", StaticFiles(directory="src/app/frontend"), name="static")
 
 # app.add_middleware(
 #     CORSMiddleware,
@@ -34,6 +25,3 @@ async def predict(file: UploadFile = File(...)):
 async def root():
     return {"message": "FastAPI backend is running."}
 
-@app.get("/", response_class=FileResponse)
-async def serve_frontend():
-    return FileResponse(str(static_path / "index.html"))

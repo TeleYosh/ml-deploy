@@ -2,3 +2,5 @@
 *__pycache__
 *.vscode
 *.gradio
+*.venv
+*.pytest_cache
