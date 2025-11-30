@@ -7,8 +7,8 @@ from torch.utils.data import DataLoader
 from datasets import load_dataset
 from torchvision import transforms
 import json
-from gradio_demo.model.sketch_images.cnn import CNN
-from gradio_demo.model.utils import train
+from cnn import CNN
+from utils import train
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f'Current device is: {device}')

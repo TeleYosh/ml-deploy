@@ -57,6 +57,8 @@ function resizeCanvas() {
   
   canvas.width = size;
   canvas.height = size;
+  // restore drawing after resize
+  // ctx.putImageData(imageData, 0, 0);
 }
 
 resizeCanvas();
