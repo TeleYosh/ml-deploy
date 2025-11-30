@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
 from PIL import Image
-from app.models.cnn import CNN, CNN_v2
+from models.cnn import CNN, CNN_v2
 from app.backend.config import MODEL_PATH, LABELS_PATH, PARAMS_PATH
 import io
 
